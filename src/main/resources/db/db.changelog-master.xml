@@ -39,7 +39,7 @@
     <sql>
       <![CDATA[
       insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c3', 'Did you hear about the fire at the circus?','It was <b style="color: orange">in tents!</b>');
-      insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c4', 'When does a joke become a ‘dad’ joke?','When it becomes apparent.');
+      insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c4', 'When does a joke become a ‘dad’ joke?','<div onmouseover="alert(''i will steal your sso token'')">When it becomes <b>apparent.</b></div>');
       insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c5', 'You know why you never see elephants hiding up in trees?','Because they''re really good at it!');
       insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c6', 'How did the hipster burn his mouth?','He ate his pizza before it was cool.');
       insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c7', 'How much space will be freed in the EU after Brexit?','Approximately 1 GB.');
