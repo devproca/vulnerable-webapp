@@ -13,6 +13,11 @@ label {
   color: #272828;
 }
 
+a {
+  cursor: pointer;
+  color: #2BB0ED;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -23,10 +28,6 @@ label {
 
 .ml-2 {
   margin-left: .5rem;
-}
-
-.m-auto {
-  margin: auto;
 }
 
 .input {

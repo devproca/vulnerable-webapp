@@ -1,0 +1,21 @@
+<div class="card">
+
+  <h1>Create/Edit Jole</h1>
+
+  <form class="mt-6" [formGroup]="formGroup">
+    <div>
+      <label>Setup</label>
+      <textarea class="input" formControlName="setup"></textarea>
+      <div class="error-text" *ngIf="errors.setup">{{errors.setup}}</div>
+    </div>
+    <div class="mt-4">
+      <label>Punchline</label>
+      <textarea class="input" formControlName="punchline"></textarea>
+      <div class="error-text" *ngIf="errors.punchline">{{errors.punchline}}</div>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-primary" (click)="save()">Save</button>
+      <button class="btn btn-secondary ml-2" (click)="redirectToJokeList()">Back to list</button>
+    </div>
+  </form>
+</div>

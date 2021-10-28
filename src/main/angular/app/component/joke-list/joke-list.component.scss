@@ -9,5 +9,8 @@
 
 .joke > .punchline {
   color: #767D84;
+}
+
+.joke > *:not(:first-child) {
   margin-top: .25rem;
 }

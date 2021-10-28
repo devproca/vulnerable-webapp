@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {RegistrationService} from "../service/registration.service";
+import {RegistrationService} from "../../service/registration.service";
 import {Router} from "@angular/router";
 import {HttpStatusCode} from "@angular/common/http";
 

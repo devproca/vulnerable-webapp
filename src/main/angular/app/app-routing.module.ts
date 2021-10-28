@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {RegistrationComponent} from "./registration/registration.component";
+import {LoginComponent} from "./component/login/login.component";
+import {RegistrationComponent} from "./component/registration/registration.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-import {JokeListComponent} from "./joke-list/joke-list.component";
+import {JokeListComponent} from "./component/joke-list/joke-list.component";
 import {AuthGuard} from "./guard/auth.guard";
+import {JokeEditComponent} from "./component/joke-edit/joke-edit.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,20 @@ const routes: Routes = [
     path: 'jokes',
     component: JokeListComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'jokes/create',
+    component: JokeEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'jokes/:jokeId',
+    component: JokeEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    component: LoginComponent
   },
 ];
 

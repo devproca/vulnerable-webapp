@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AuthenticationService} from "../service/authentication.service";
+import {AuthenticationService} from "../../service/authentication.service";
+import {HttpStatusCode} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent {
       () => this.redirectToJokes(),
       httpError => {
         this.formGroup.enable({emitEvent: false});
-        if (httpError.status === 403) {
+        if (httpError.status === HttpStatusCode.Unauthorized) {
           this.error = "Invalid username or password.";
         }
       });

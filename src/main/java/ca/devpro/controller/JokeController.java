@@ -26,6 +26,11 @@ public class JokeController {
     return jokeService.get(jokeId);
   }
 
+  @PostMapping
+  public JokeDto create(@RequestBody JokeDto dto) {
+    return jokeService.create(dto);
+  }
+
   @PutMapping("/{jokeId}")
   public JokeDto update(@PathVariable("jokeId") UUID jokeId, @RequestBody JokeDto dto) {
     dto.setJokeId(jokeId);

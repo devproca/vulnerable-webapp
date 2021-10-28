@@ -3,5 +3,14 @@
   <div *ngFor="let joke of jokes" class="joke">
     <div class="setup">{{joke.setup}}</div>
     <div class="punchline" [innerHTML]="joke.punchline | safeHtml"></div>
+    <a (click)="editJoke(joke)">Edit</a>
+  </div>
+
+
+  <div class="mt-4">
+    <button class="btn btn-primary" (click)="newJoke()">New joke</button>
   </div>
 </div>
+
+
+

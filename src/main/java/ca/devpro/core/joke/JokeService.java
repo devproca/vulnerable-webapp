@@ -19,7 +19,6 @@ public class JokeService {
   @Autowired
   private JokeValidator jokeValidator;
 
-
   public JokeDto create(JokeDto dto) {
     jokeValidator.validateAndThrow(dto);
     Joke entity = jokeAssembler.disassemble(dto);
@@ -46,7 +45,7 @@ public class JokeService {
       .map(entity -> jokeAssembler.disassembleInto(dto, entity))
       .map(jokeRepository::save)
       .map(jokeAssembler::assemble)
-      .orElseThrow(() -> new NotFoundException());
+      .orElseThrow(NotFoundException::new);
   }
 
   public void delete(UUID jokeId) {

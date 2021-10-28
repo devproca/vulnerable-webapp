@@ -33,6 +33,7 @@ public class Joke {
 
   public static Joke newInstance() {
     Joke joke = new Joke();
+    joke.jokeId = UUID.randomUUID();
     return joke;
   }
 }

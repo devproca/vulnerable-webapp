@@ -13,12 +13,11 @@ export class JokeService {
   constructor(private http: HttpClient) {
   }
 
-  create(joke: Joke): Observable<Joke> {
+  save(joke: Joke): Observable<Joke> {
+    if (joke.jokeId) {
+      return this.http.put<Joke>(`${BASE_URI}/${joke.jokeId}`, joke);
+    }
     return this.http.post<Joke>(BASE_URI, joke);
-  }
-
-  update(joke: Joke): Observable<Joke> {
-    return this.http.put<Joke>(`${BASE_URI}/${joke.jokeId}`, joke);
   }
 
   delete(jokeId: string): Observable<void> {
