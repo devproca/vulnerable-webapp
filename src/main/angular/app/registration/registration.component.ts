@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {RegistrationService} from "../service/registration.service";
 import {Router} from "@angular/router";
+import {HttpStatusCode} from "@angular/common/http";
 
 @Component({
   selector: 'app-registration',
@@ -24,11 +25,10 @@ export class RegistrationComponent {
     this.registrationService.register(user).subscribe(
       () => this.redirectToLogin(),
       httpError => {
-        if (httpError.status === 400) {
+        this.formGroup.enable({emitEvent: false});
+        if (httpError.status === HttpStatusCode.BadRequest) {
           this.errors = httpError.error;
         }
-      }, () => {
-        this.formGroup.enable({emitEvent: false});
       });
   }
 

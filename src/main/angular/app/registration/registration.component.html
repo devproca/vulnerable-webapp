@@ -1,29 +1,30 @@
+<div class="card">
 
-<h1>Register</h1>
+  <h1>Register</h1>
 
-<form [formGroup]="formGroup">
-  <div>
-    <label>First name</label>
-    <input type="text" class="input" formControlName="firstName">
-    <div class="error-text" *ngIf="errors.firstName">{{errors.firstName}}</div>
-  </div>
-  <div>
-    <label>Last name</label>
-    <input type="text" class="input" formControlName="lastName">
-    <div class="error-text" *ngIf="errors.lastName">{{errors.lastName}}</div>
-  </div>
-  <div>
-    <label>Username</label>
-    <input type="text" class="input" formControlName="username">
-    <div class="error-text" *ngIf="errors.username">{{errors.username}}</div>
-  </div>
-  <div>
-    <label>Password</label>
-    <input type="password" class="input" formControlName="username">
-    <div class="error-text" *ngIf="errors.password">{{errors.password}}</div>
-  </div>
-  <div>
-    <button class="btn-primary" (click)="register()">Register</button>
-  </div>
-</form>
-
+  <form class="mt-6" [formGroup]="formGroup">
+    <div>
+      <label>First name</label>
+      <input type="text" class="input" formControlName="firstName">
+      <div class="error-text" *ngIf="errors.firstName">{{errors.firstName}}</div>
+    </div>
+    <div class="mt-4">
+      <label>Last name</label>
+      <input type="text" class="input" formControlName="lastName">
+      <div class="error-text" *ngIf="errors.lastName">{{errors.lastName}}</div>
+    </div>
+    <div class="mt-4">
+      <label>Username</label>
+      <input type="text" class="input" formControlName="username">
+      <div class="error-text" *ngIf="errors.username">{{errors.username}}</div>
+    </div>
+    <div class="mt-4">
+      <label>Password</label>
+      <input type="password" class="input" formControlName="password">
+      <div class="error-text" *ngIf="errors.password">{{errors.password}}</div>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-primary" (click)="register()">Register</button>
+    </div>
+  </form>
+</div>

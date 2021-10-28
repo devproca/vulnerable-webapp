@@ -11,7 +11,7 @@ import {AuthenticationService} from "../service/authentication.service";
 export class LoginComponent {
 
   formGroup = this.createFormGroup();
-  errors: any = {};
+  error: string | null = null;
 
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
@@ -19,16 +19,16 @@ export class LoginComponent {
   }
 
   login(): void {
+    this.error = null;
     const credentials = this.formGroup.value;
     this.formGroup.disable({emitEvent: false});
     this.authenticationService.login(credentials).subscribe(
       () => this.redirectToJokes(),
       httpError => {
-        if (httpError.status === 400) {
-          this.errors = httpError.error;
-        }
-      }, () => {
         this.formGroup.enable({emitEvent: false});
+        if (httpError.status === 403) {
+          this.error = "Invalid username or password.";
+        }
       });
   }
 

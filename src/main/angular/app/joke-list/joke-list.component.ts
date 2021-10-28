@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {JokeService} from "../service/joke.service";
+import {Joke} from "../model/joke.model";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-joke-list',
@@ -7,9 +10,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class JokeListComponent implements OnInit {
 
-  constructor() { }
+  jokes: Joke[] = [];
+
+  constructor(private jokeService: JokeService,
+              private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    this.jokeService.findAll().subscribe(jokes => {
+      this.jokes = jokes;
+
+    });
   }
+
+
 
 }

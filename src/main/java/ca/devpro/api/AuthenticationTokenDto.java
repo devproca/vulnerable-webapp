@@ -6,5 +6,5 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class AuthenticationTokenDto {
-    private String token;
+  private String token;
 }

@@ -2,29 +2,56 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="create-usr-table" author="doddt">
-        <createTable tableName="usr">
-            <column name="usr_id" type="varchar(36)">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="username" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="first_name" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="last_name" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="varchar(100)">
-            </column>
-        </createTable>
-    </changeSet>
+  <changeSet id="create-usr-table" author="doddt">
+    <createTable tableName="usr">
+      <column name="usr_id" type="char(36)">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="username" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="first_name" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="last_name" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="password" type="varchar(100)">
+      </column>
+    </createTable>
+  </changeSet>
 
-    <changeSet id="create-default-user" author="doddt">
-        <sql>
-<!--            you might need this value 6nIoXXH13siW9JJT46iC+g==-->
-            insert into usr values('d2e8db5a-fc3e-476a-9b77-77bd997044c3', 'admin', 'Admin' ,'User', 'OpU6swb0nZuUdnohCf1A7g==');
-        </sql>
-    </changeSet>
+  <changeSet id="create-joke-table" author="doddt">
+    <createTable tableName="joke">
+      <column name="joke_id" type="char(36)">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="setup" type="text">
+        <constraints nullable="false"/>
+      </column>
+      <column name="punchline" type="text">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="create-default-jokes" author="doddt">
+    <sql>
+      <![CDATA[
+      insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c3', 'Did you hear about the fire at the circus?','It was <b style="color: orange">in tents!</b>');
+      insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c4', 'When does a joke become a ‘dad’ joke?','When it becomes apparent.');
+      insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c5', 'You know why you never see elephants hiding up in trees?','Because they''re really good at it!');
+      insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c6', 'How did the hipster burn his mouth?','He ate his pizza before it was cool.');
+      insert into joke values ('a2e8db5a-fc3e-476a-9b77-77bd997044c7', 'How much space will be freed in the EU after Brexit?','Approximately 1 GB.');
+      ]]>
+    </sql>
+  </changeSet>
+
+  <changeSet id="create-default-user" author="doddt">
+    <sql>
+      <!-- you might need this value 6nIoXXH13siW9JJT46iC+g==-->
+      <!-- The value of this hashed password is Today123 -->
+      insert into usr values('d2e8db5a-fc3e-476a-9b77-77bd997044c3', 'admin', 'Admin' ,'User', 'OpU6swb0nZuUdnohCf1A7g==');
+    </sql>
+  </changeSet>
 </databaseChangeLog>

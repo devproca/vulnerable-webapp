@@ -21,36 +21,36 @@ import java.util.UUID;
 @Accessors(chain = true)
 public class User {
 
-    @Id
-    @Column(name = "usr_id")
-    @Type(type = "uuid-char")
-    @Setter(AccessLevel.NONE)
-    private UUID userId;
+  @Id
+  @Column(name = "usr_id")
+  @Type(type = "uuid-char")
+  @Setter(AccessLevel.NONE)
+  private UUID userId;
 
-    @Column(name = "first_name")
-    private String firstName;
+  @Column(name = "first_name")
+  private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+  @Column(name = "last_name")
+  private String lastName;
 
-    @Column(name = "username")
-    @Setter(AccessLevel.NONE)
-    private String username;
+  @Column(name = "username")
+  @Setter(AccessLevel.NONE)
+  private String username;
 
-    @Column(name = "password")
-    @Setter(AccessLevel.NONE)
-    private String password;
+  @Column(name = "password")
+  @Setter(AccessLevel.NONE)
+  private String password;
 
-    public static User newInstance(String username, String password) {
-        User user = new User();
-        user.userId = UUID.randomUUID();
-        user.password = Hashes.hash(password, user.getSalt());
-        user.username = username.toLowerCase(Locale.ROOT);
-        return user;
-    }
+  public static User newInstance(String username, String password) {
+    User user = new User();
+    user.userId = UUID.randomUUID();
+    user.password = Hashes.hash(password, user.getSalt());
+    user.username = username.toLowerCase(Locale.ROOT);
+    return user;
+  }
 
-    public String getSalt() {
-        return "123456";
-    }
+  public String getSalt() {
+    return "123456";
+  }
 
 }

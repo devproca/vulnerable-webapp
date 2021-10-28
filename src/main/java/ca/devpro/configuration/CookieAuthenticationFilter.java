@@ -13,31 +13,30 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CookieAuthenticationFilter extends AbstractPreAuthenticatedProcessingFilter {
 
-    private final Sessions sessions;
-    private final AuthenticationManager authenticationManager;
+  private final Sessions sessions;
+  private final AuthenticationManager authenticationManager;
 
-    @PostConstruct
-    public void init() {
-        setAuthenticationManager(authenticationManager);
-        setContinueFilterChainOnUnsuccessfulAuthentication(false);
+  @PostConstruct
+  public void init() {
+    setAuthenticationManager(authenticationManager);
+    setContinueFilterChainOnUnsuccessfulAuthentication(false);
+  }
+
+  protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
+    String sessionId = Optional.of(request)
+      .map(r -> WebUtils.getCookie(r, "ssotoken"))
+      .map(Cookie::getValue)
+      .orElse(null);
+
+    if (sessionId == null) {
+      return null;
+    } else if (!sessions.hasSession(sessionId)) {
+      return null;
     }
+    return sessions.getUserBySessionId(sessionId).get();
+  }
 
-    protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
-        String sessionId = Optional.of(request)
-                .map(r -> WebUtils.getCookie(r, "ssotoken"))
-                .map(Cookie::getValue)
-                .orElse(null);
-
-        if (sessionId == null) {
-            return null;
-//            throw new UnauthorizedException();
-        } else if (!sessions.hasSession(sessionId)) {
-            return null;
-        }
-        return sessions.getUserBySessionId(sessionId).get();
-    }
-
-    protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
-        return "N/A";
-    }
+  protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
+    return "N/A";
+  }
 }

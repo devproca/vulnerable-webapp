@@ -13,21 +13,21 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
 
-    @Autowired
-    private MessageSource messageSource;
+  @Autowired
+  private MessageSource messageSource;
 
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Map<String, String>> handleValidationException(ValidationException ex) {
-        Map<String, String> translatedErrors = ex.getErrors()
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> translate(e.getValue())));
+  @ExceptionHandler(ValidationException.class)
+  public ResponseEntity<Map<String, String>> handleValidationException(ValidationException ex) {
+    Map<String, String> translatedErrors = ex.getErrors()
+      .entrySet()
+      .stream()
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> translate(e.getValue())));
 
-        return ResponseEntity.badRequest().body(translatedErrors);
-    }
+    return ResponseEntity.badRequest().body(translatedErrors);
+  }
 
-    private String translate(String code) {
-        return messageSource.getMessage(code, new Object[]{}, code, LocaleContextHolder.getLocale());
-    }
+  private String translate(String code) {
+    return messageSource.getMessage(code, new Object[]{}, code, LocaleContextHolder.getLocale());
+  }
 
 }

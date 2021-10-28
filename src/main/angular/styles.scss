@@ -1,20 +1,78 @@
+html {
+  font-family: Sans-Serif;
+  color: #272828;
+  background-color: #E7E9EB;
+}
 
+h1 {
+  margin: 0;
+}
+
+label {
+  display: block;
+  color: #272828;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.ml-2 {
+  margin-left: .5rem;
+}
+
+.m-auto {
+  margin: auto;
+}
 
 .input {
   border: 1px solid #ccc;
   border-radius: 3px;
-  padding: .75rem .5rem;
+  padding: .5rem .75rem;
 }
 
 .error-text {
   font-size: .75rem;
+  color: #CF1124;
+}
 
+.btn {
+  padding: .5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  transition: all 300ms;
 }
 
 .btn-primary {
-  padding: .75rem .5rem;
-  background-color: blue;
-  color: white;
-  border-radius: 3px;
-  cursor: pointer;
+  background-color: #334E68;
+  color: #FFF;
 }
+
+.btn-primary:hover {
+  background-color: #243B53;
+}
+
+.btn-secondary {
+  background-color: #DFE3E7;
+  color: #272828;
+}
+
+.btn-secondary:hover {
+  background-color: #B9BCBF;
+  transition: all 300ms;
+}
+
+.card {
+  display: inline-block;
+  padding: 1.5rem;
+  border-radius: 3px;
+  background-color: #fff;
+  border: 1px solid #C4C9CE;
+}
+
+

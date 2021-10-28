@@ -1,1 +1,7 @@
-<p>joke-list works!</p>
+<div class="card">
+  <h1>Jokes</h1>
+  <div *ngFor="let joke of jokes" class="joke">
+    <div class="setup">{{joke.setup}}</div>
+    <div class="punchline" [innerHTML]="joke.punchline | safeHtml"></div>
+  </div>
+</div>

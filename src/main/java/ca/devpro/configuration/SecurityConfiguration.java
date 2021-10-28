@@ -21,46 +21,40 @@ import java.util.Collections;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+  @Override
+  public void configure(HttpSecurity http) throws Exception {
+    http.addFilterAfter(cookieAuthenticationFilter(), RequestHeaderAuthenticationFilter.class)
+      .authorizeRequests()
+      .antMatchers(
+        "/api/authentication/login",
+        "/api/registrations").permitAll()
+      .anyRequest().authenticated()
+      .and()
+      .csrf().disable();
+  }
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.addFilterAfter(cookieAuthenticationFilter(), RequestHeaderAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers("/api/users/login").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .csrf().disable();
-    }
+  @Bean
+  public Sessions sessions() {
+    return new Sessions();
+  }
 
-    @Bean
-    public Sessions sessions() {
-        return new Sessions();
-    }
+  @Bean
+  public CookieAuthenticationFilter cookieAuthenticationFilter() {
+    return new CookieAuthenticationFilter(sessions(), authenticationManager());
+  }
 
-    @Bean
-    public CookieAuthenticationFilter cookieAuthenticationFilter() {
-        return new CookieAuthenticationFilter(sessions(), authenticationManager());
-    }
+  @Bean
+  public AuthenticationManager authenticationManager() {
+    return new ProviderManager(Collections.singletonList(preauthAuthProvider()));
+  }
 
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        return new ProviderManager(Collections.singletonList(preauthAuthProvider()));
-    }
+  @Bean(name = "preAuthProvider")
+  public PreAuthenticatedAuthenticationProvider preauthAuthProvider() {
+    PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();
+    provider.setPreAuthenticatedUserDetailsService(new CustomAuthenticationUserDetailsService());
+    return provider;
+  }
 
-    @Bean(name = "preAuthProvider")
-    public PreAuthenticatedAuthenticationProvider preauthAuthProvider() {
-        PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();
-        provider.setPreAuthenticatedUserDetailsService(userDetailsServiceWrapper());
-        return provider;
-    }
 
-    @Bean
-    public UserDetailsByNameServiceWrapper<PreAuthenticatedAuthenticationToken> userDetailsServiceWrapper() {
-        UserDetailsByNameServiceWrapper<PreAuthenticatedAuthenticationToken> wrapper = new UserDetailsByNameServiceWrapper<>();
-        wrapper.setUserDetailsService(customUserDetailsService);
-        return wrapper;
-    }
+
 }
